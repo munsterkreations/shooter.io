@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Space Shooting Game</title>
+  <style>
+    canvas {
+      display: block;
+      margin: 0 auto;
+      background: black;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="gameCanvas" width="800" height="600"></canvas>
+  <script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+
+    class SpaceShip {
+      constructor() {
+        this.width = 50;
+        this.height = 50;
+        this.x = canvas.width / 2 - this.width / 2;
+        this.y = canvas.height - this.height - 10;
+        this.speed = 5;
+        this.dx = 0;
+      }
+
+      draw() {
+        ctx.fillStyle = 'white';
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+      }
+
+      update() {
+        this.x += this.dx;
+
+        if (this.x < 0) {
+          this.x = 0;
+        }
+
+        if (this.x + this.width > canvas.width) {
+          this.x = canvas.width - this.width;
+        }
+      }
+
+      moveRight() {
+        this.dx = this.speed;
+      }
+
+      moveLeft() {
+        this.dx = -this.speed;
+      }
+
+      stop() {
+        this.dx = 0;
+      }
+    }
+
+    const ship = new SpaceShip();
+
+    function update() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ship.update();
+      ship.draw();
+      requestAnimationFrame(update);
+    }
+
+    function keyDown(e) {
+      if (e.key === 'ArrowRight' || e.key === 'Right') {
+        ship.moveRight();
+      } else if (e.key === 'ArrowLeft' || e.key === 'Left') {
+        ship.moveLeft();
+      }
+    }
+
+    function keyUp(e) {
+      if (
+        e.key === 'ArrowRight' ||
+        e.key === 'Right' ||
+        e.key === 'ArrowLeft' ||
+        e.key === 'Left'
+      ) {
+        ship.stop();
+      }
+    }
+
+    document.addEventListener('keydown', keyDown);
+    document.addEventListener('keyup', keyUp);
+
+    update();
+  </script>
+</body>
+</html>
