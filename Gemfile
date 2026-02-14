@@ -6,16 +6,15 @@ source "https://rubygems.org"
 gemspec
 
 gem "rake", "~> 13.0"
-patch-1
 gem "github-pages"
-gem "jekyll"
+gem "jekyll", "~> 4.3.3"
 gem "jekyll-github-metadata"
-gem "gosu"
-
-gem "jekyll", "~> 04.03.03"
 gem "gosu", "~> 1.4.6"
-gem  "dotenv"
-gem "github-pages"
-gem "jekyll-github-metadata"
-gem "gosu"
+gem "dotenv"
+
+# 3D graphics and model loading
+gem "mittsu", "~> 0.4.0"
+gem "opengl", "~> 0.10.0"
+gem "glu", "~> 8.3.0"
+gem "glut", "~> 8.3.0"
  master
